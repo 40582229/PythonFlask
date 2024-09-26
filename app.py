@@ -17,4 +17,9 @@ def htmlDiv():
 def test():
     return "This is test"
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Couldnt find the page requested.", 404
 
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
