@@ -1,5 +1,6 @@
 from flask import Flask
 from requests import get
+from random import randrange
 app = Flask(__name__)
 
 @app.route("/")
@@ -9,7 +10,8 @@ def  home():
 
 @app.route("/chalange2")
 def htmlDiv():
-    return '<h1>THIS IS H!</hv>'
+    htmlElements = ['<h1>HELLO</hv>','<h1>THIS IS RANDOM</hv>', '<h1>TROLOLOLOLOLO</hv>']
+    return htmlElements[randrange(0,3)]
 
 @app.route("/test")
 def test():
