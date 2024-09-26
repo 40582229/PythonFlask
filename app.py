@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from requests import get
 from random import randrange
 app = Flask(__name__)
@@ -20,6 +20,21 @@ def test():
 @app.errorhandler(404)
 def page_not_found(error):
     return "Couldnt find the page requested.", 404
+
+@app.route('/private')
+def private():
+    return redirect(url_for('login'))
+
+@app.route('/login')
+def login():
+    return "WE ARE GETTING YOUR USERNAME AND PASSWORD"
+
+@app.route('/static-example/img')
+def static_example_img():
+    start = '<img id="image" src="'
+    url = url_for('static', filename='vmask.jpg')
+    end = '">'
+    return start+url+end, 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
