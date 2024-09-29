@@ -31,10 +31,12 @@ def login():
 
 @app.route('/static-example/img')
 def static_example_img():
+    cssUrl = url_for('static', filename='static.css')
+    cssLink = f'<link rel="stylesheet"  href="{cssUrl}">'
     start = '<img id="image" src="'
     url = url_for('static', filename='vmask.jpg')
     end = '">'
-    return start+url+end, 200
+    return cssLink+start+url+end, 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
