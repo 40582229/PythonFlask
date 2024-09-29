@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, request, url_for
 from requests import get
 from random import randrange
 app = Flask(__name__)
@@ -37,6 +37,18 @@ def static_example_img():
     url = url_for('static', filename='vmask.jpg')
     end = '">'
     return cssLink+start+url+end, 200
+
+@app.route('/requests')
+def httpRequests():
+    print(request.method , request.path , request.form )
+    return request.method, request.path, request.form 
+
+@app.route('/account', methods=['GET', 'POST'])
+def account():
+    if request.method == 'POST':
+        return " POST ’ed to / account root \n"
+    else:
+        return " GET / account root "
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
