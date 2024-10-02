@@ -46,9 +46,30 @@ def httpRequests():
 @app.route('/account', methods=['GET', 'POST'])
 def account():
     if request.method == 'POST':
-        return " POST ’ed to / account root \n"
+        print(request.form)
+        name = request.form['name']
+        return "Hello %s" % name
     else:
-        return " GET / account root "
+        page = '''
+                <html>
+                    <body>
+                        <form action="" method="post" name="form">
+                            <label for="name">name</label>
+                            <input type="text" name="name" id="name" />
+                            <input type="submit" name="submit" id="submit" />
+                        </form>
+                    </body>
+                </html>
+            '''
+        return page
+
+@app.route('/hello/<name>')
+def hello(name):
+    return "Hello %s" % name
+
+@app.route('/add/<int:first>/<int:second>')
+def add(first, second):
+    return str(first+second)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
