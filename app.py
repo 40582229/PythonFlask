@@ -63,8 +63,12 @@ def account():
             '''
         return page
 
-@app.route('/hello/<name>')
-def hello(name):
+@app.route('/hello/')
+def hello():
+    name = request.args.get('name', '')
+    if name == "":
+        return "No Param supplied"
+    
     return "Hello %s" % name
 
 @app.route('/add/<int:first>/<int:second>')
