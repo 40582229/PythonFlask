@@ -75,5 +75,24 @@ def hello():
 def add(first, second):
     return str(first+second)
 
+@app.route('/file/', methods=['POST', 'GET'])
+def file():
+    if request.method == 'POST':
+        f = request.files['datafile']
+        f.save('static/uploads/upload.png')
+        return 'File uploaded'
+    else:
+        page = '''
+                <html >
+                <body >
+                <form actio ="" method="post" name="form" enctype="multipart/form-data">
+                    <input type="file" name="datafile" / >
+                    <input type="submit" name="submit" id="submit"/ >
+                </form >
+                </body >
+                </html >
+            '''
+        return page, 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
