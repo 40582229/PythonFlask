@@ -34,7 +34,7 @@ def static_example_img():
     cssUrl = url_for('static', filename='static.css')
     cssLink = f'<link rel="stylesheet"  href="{cssUrl}">'
     start = '<img id="image" src="'
-    url = url_for('static', filename='vmask.jpg')
+    url = url_for('static', filename='uploads/upload.png')
     end = '">'
     return cssLink+start+url+end, 200
 
@@ -80,7 +80,9 @@ def file():
     if request.method == 'POST':
         f = request.files['datafile']
         f.save('static/uploads/upload.png')
-        return 'File uploaded'
+
+
+        return 'File Saved'
     else:
         page = '''
                 <html >
